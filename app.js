@@ -65,6 +65,7 @@ app.delete("/courses/:id", (req, res) => {
   if (findIND !== -1) {
     data.courses.splice(findIND, 1);
     gpaCal();
+    fs.writeFileSync('./myCourses.json',JSON.stringify(data,null,4))
     return res.json({
       success: true,
 
@@ -84,6 +85,7 @@ app.post("/addCourse",(req, res) => {
   const create = Object.keys(req.body)
   if(create.length == 4){data.courses.push(req.body)
     gpaCal();
+    fs.writeFileSync('./myCourses.json',JSON.stringify(data,null,4))
   return res.json(req.body)}
   else{
     return res.json(
